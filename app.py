@@ -200,12 +200,182 @@ if page == "What-If Simulator":
     st.title("🔄 What-If Simulator")
 
     st.write(
-        "Test how operational decisions affect disruption risk."
+        "Evaluate how operational changes affect disruption risk."
     )
 
-    st.info(
-        "Coming next: compare current risk vs modified scenario."
+    st.subheader("Current Scenario")
+
+    current_event_type = st.selectbox(
+        "Current Event Type",
+        ["planned", "unplanned"]
     )
+
+    current_event_cause = st.selectbox(
+        "Current Event Cause",
+        list(event_freq.keys())
+    )
+
+    current_priority = st.selectbox(
+        "Current Priority",
+        ["High", "Low"]
+    )
+
+    current_corridor = st.selectbox(
+        "Current Corridor",
+        list(corridor_freq.keys())
+    )
+
+    current_zone = st.selectbox(
+        "Current Zone",
+        [
+            "Central Zone 1",
+            "Central Zone 2",
+            "East Zone 1",
+            "East Zone 2",
+            "North Zone 1",
+            "North Zone 2",
+            "South Zone 1",
+            "South Zone 2",
+            "West Zone 1",
+            "West Zone 2"
+        ]
+    )
+
+    current_road_closure = st.selectbox(
+        "Current Road Closure",
+        [0, 1]
+    )
+
+    current_hour = st.slider(
+        "Current Hour",
+        0,
+        23,
+        9
+    )
+
+    st.divider()
+
+    st.subheader("Modified Scenario")
+
+    new_priority = st.selectbox(
+        "Modified Priority",
+        ["High", "Low"]
+    )
+
+    new_road_closure = st.selectbox(
+        "Modified Road Closure",
+        [0, 1]
+    )
+
+    new_hour = st.slider(
+        "Modified Hour",
+        0,
+        23,
+        9
+    )
+
+    new_event_cause = st.selectbox(
+        "Modified Event Cause",
+        list(event_freq.keys())
+    )
+
+    new_corridor = st.selectbox(
+        "Modified Corridor",
+        list(corridor_freq.keys())
+    )
+
+    if st.button("Run Simulation"):
+
+        _, current_prob = make_prediction(
+            current_event_type,
+            current_event_cause,
+            current_priority,
+            current_corridor,
+            current_zone,
+            current_road_closure,
+            current_hour
+        )
+
+        _, new_prob = make_prediction(
+            current_event_type,
+            new_event_cause,
+            new_priority,
+            new_corridor,
+            current_zone,
+            new_road_closure,
+            new_hour
+        )
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.metric(
+                "Current Risk",
+                f"{current_prob * 100:.1f}%"
+            )
+
+        with col2:
+            st.metric(
+                "New Risk",
+                f"{new_prob * 100:.1f}%"
+            )
+
+        change = (
+            current_prob - new_prob
+        ) * 100
+
+        st.metric(
+            "Risk Reduction",
+            f"{change:.1f}%"
+        )
+
+        if change > 10:
+
+            st.success(
+                "This intervention significantly reduces disruption risk."
+            )
+
+        elif change > 0:
+
+            st.info(
+                "This intervention provides moderate improvement."
+            )
+
+        elif change == 0:
+
+            st.warning(
+                "No change detected."
+            )
+
+        else:
+
+            st.error(
+                "This modification increases disruption risk."
+            )
+
+        st.subheader("Decision Support")
+
+        if new_prob < current_prob:
+
+            st.write(
+                """
+                Recommended Action:
+
+                The modified scenario produces a lower risk score.
+                Consider implementing these operational changes
+                to reduce the likelihood of a prolonged disruption.
+                """
+            )
+
+        else:
+
+            st.write(
+                """
+                Recommended Action:
+
+                The modified scenario does not improve the risk score.
+                Consider alternative interventions.
+                """
+            )
 
 
 if page == "Intelligence Dashboard":
