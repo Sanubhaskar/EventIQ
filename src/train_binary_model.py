@@ -137,12 +137,12 @@ scores = cross_val_score(
 print(scores)
 print("Mean AUC:", scores.mean())
 
-'''import shap
+import shap
 
 explainer = shap.TreeExplainer(model)
 shap_values = explainer.shap_values(X)
 
-shap.summary_plot(shap_values, X)'''
+shap.summary_plot(shap_values, X)
 
 from sklearn.model_selection import StratifiedKFold, cross_val_score
 
