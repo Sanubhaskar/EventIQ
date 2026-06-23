@@ -1,15 +1,15 @@
-EventIQ – AI-Powered Traffic Risk Prediction System
+# 🚦 EventIQ – AI-Powered Traffic Risk Prediction System
 
-Team SKAM
+## Team SKAM
 
 * B. Sahana
 * N. Krithikha
 * Aswini Venkatesan
-* K. K. Madhumitha
+* KK Madhumitha
 
 ---
 
-Overview
+## Overview
 
 EventIQ is an AI-powered traffic risk prediction and decision-support system designed to help traffic management authorities proactively identify incidents that are likely to result in prolonged disruptions.
 
@@ -17,7 +17,7 @@ Using historical Bengaluru traffic event data, EventIQ analyzes temporal, spatia
 
 ---
 
-Problem Statement
+## Problem Statement
 
 Traffic authorities often respond after congestion has already escalated. Incidents such as vehicle breakdowns, road construction, accidents, and water logging can significantly impact traffic flow and resource allocation.
 
@@ -25,35 +25,35 @@ EventIQ aims to support proactive traffic management by predicting high-risk inc
 
 ---
 
-Features
+## Features
 
-Risk Predictor
+### Risk Predictor
 
 Predicts whether an incoming traffic event is likely to become a prolonged disruption.
 
-What-If Simulator
+### What-If Simulator
 
 Allows operators to compare different intervention scenarios and evaluate how operational decisions affect disruption risk.
 
-Traffic Intelligence Dashboard
+### Traffic Intelligence Dashboard
 
 Provides model performance metrics, event distributions, feature importance insights, and operational intelligence.
 
 ---
 
-Dataset
+## Dataset
 
-Source: Bengaluru Traffic Event Dataset
+**Source:** Bengaluru Traffic Event Dataset
 
-Original Dataset
+### Original Dataset
 
 * 8,173 traffic event records
 
-Training Dataset
+### Training Dataset
 
 * 2,460 validated records
 
-Data Processing
+### Data Processing
 
 * Timestamp conversion
 * Duration calculation
@@ -63,9 +63,9 @@ Data Processing
 
 ---
 
-Feature Engineering
+## Feature Engineering
 
-Temporal Features
+### Temporal Features
 
 * Hour of Day
 * Day of Week
@@ -73,29 +73,29 @@ Temporal Features
 * Weekend Indicator
 * Peak Hour Indicator
 
-Operational Features
+### Operational Features
 
 * Event Type
 * Event Cause
 * Priority
 * Road Closure Requirement
 
-Spatial Features
+### Spatial Features
 
 * Corridor
 * Zone
 * Non-Corridor Indicator
 
-Frequency-Based Features
+### Frequency-Based Features
 
 * Event Cause Frequency
 * Corridor Frequency
 
 ---
 
-Machine Learning Pipeline
+## Machine Learning Pipeline
 
-Initial Approach
+### Initial Approach
 
 Multi-class Classification
 
@@ -108,14 +108,14 @@ Result:
 
 * Accuracy ≈ 42%
 
-Final Approach
+### Final Approach
 
 Binary Classification
 
 * High Risk
 * Low Risk
 
-Model
+### Model
 
 XGBoost Classifier
 
@@ -126,7 +126,9 @@ Reasons for Selection:
 * Captures non-linear relationships
 * Supports explainability through feature importance
 
-Model Performance
+---
+
+## Model Performance
 
 | Metric                  | Value         |
 | ----------------------- | ------------- |
@@ -135,13 +137,15 @@ Model Performance
 | High-Risk Recall        | 89%           |
 | Cross-Validated ROC-AUC | 0.941 ± 0.007 |
 
-Technology Stack
+---
 
-Programming Language
+## Technology Stack
+
+### Programming Language
 
 * Python
 
-Libraries
+### Libraries
 
 * Pandas
 * NumPy
@@ -150,14 +154,16 @@ Libraries
 * Streamlit
 * SHAP
 
-Tools
+### Tools
 
 * Git
 * GitHub
 
+---
 
 ## Project Structure
 
+```text
 EventIQ/
 │
 ├── app.py
@@ -178,10 +184,25 @@ EventIQ/
 │
 └── data/
     └── cleaned_events.csv
-    
-Installation: pip install -r requirements.txt
+```
 
-To Run the Application: streamlit run app.py
+---
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Run the Application
+
+```bash
+streamlit run app.py
+```
+
+---
 
 ## Future Enhancements
 
@@ -191,6 +212,8 @@ To Run the Application: streamlit run app.py
 * Advanced scenario simulation
 * Dynamic route recommendations
 
-Conclusion
+---
+
+## Conclusion
 
 EventIQ demonstrates how machine learning can support proactive traffic operations by identifying high-risk incidents early, improving resource allocation, and enabling data-driven decision-making for urban traffic management systems.
